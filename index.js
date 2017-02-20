@@ -11,12 +11,17 @@ ${lines.join("\n")}
 var components = Component.exports.components = Component.exports.components || {};
 for ( var name in _vueSubcomponents ) {
     var c = _vueSubcomponents[ name ];
-    var camelName = name.charAt(0).toUpperCase()+name.substr(1).replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
-    components[ camelName ] = c;
+
+    // Recurse subcomponents
+    c.components = c.components || {};
+    for ( var subcomp in _vueSubcomponents )
+        c.components[ subcomp ] = _vueSubcomponents[ subcomp ];
+
+    components[ name ] = c;
     if ( typeof(exports) !== 'undefined' && exports.__esModule )
-        exports[ camelName ] = c;
+        exports[ name ] = c;
     else
-        module.exports[ camelName ] = c;
+        module.exports[ name ] = c;
 }
 }());
 `;
