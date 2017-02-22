@@ -1,12 +1,12 @@
 {
   "name": "vue-loader-subcomponent",
   "version": "0.0.2",
-  "description": "",
+  "description": "vue-loader-subcomponent ===============================",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "renanhangai",
   "license": "ISC",
   "dependencies": {
     "loader-utils": "^0.2.16"
@@ -14,5 +14,18 @@
   "peerDependencies": {
     "vue-loader": "*",
     "virtual-file-loader": "*"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renanhangai/vue-loader-subcomponent.git"
+  },
+  "keywords": [
+    "vue",
+    "loader",
+    "subcomponent"
+  ],
+  "bugs": {
+    "url": "https://github.com/renanhangai/vue-loader-subcomponent/issues"
+  },
+  "homepage": "https://github.com/renanhangai/vue-loader-subcomponent#readme"
 }
