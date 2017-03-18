@@ -4,6 +4,10 @@
   "description": "Load subcomponents inside vue files",
   "main": "index.js",
   "scripts": {
+    "build-main": "rollup src/index.js -c --format umd --output index.js",
+    "build-subcomponent": "rollup src/subcomponent.js -c --format umd --output subcomponent.js",
+    "build": "npm run build-main && npm run build-subcomponent",
+    "preversion": "npm run build && git add -f index.js subcomponent.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "renanhangai",
@@ -12,8 +16,8 @@
     "loader-utils": "^0.2.16"
   },
   "peerDependencies": {
-    "vue-loader": "*",
-    "virtual-file-loader": "*"
+    "virtual-file-loader": "*",
+    "vue-loader": "*"
   },
   "repository": {
     "type": "git",
@@ -27,5 +31,11 @@
   "bugs": {
     "url": "https://github.com/renanhangai/vue-loader-subcomponent/issues"
   },
-  "homepage": "https://github.com/renanhangai/vue-loader-subcomponent#readme"
+  "homepage": "https://github.com/renanhangai/vue-loader-subcomponent#readme",
+  "devDependencies": {
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-es2015": "^6.24.0",
+    "rollup": "^0.41.6",
+    "rollup-plugin-babel": "^2.7.1"
+  }
 }
