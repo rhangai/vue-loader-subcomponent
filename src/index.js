@@ -1,10 +1,15 @@
 export default function VueLoaderSubcomponent( content ) {
+	let haveSubcomponents = false;
 	const lines = content.split("\n").map((line) => {
 		if ( line.indexOf("vue-loader-subcomponent/subcomponent") >= 0 ) {
 			line = `${line}(_vueSubcomponents)`;
+			haveSubcomponents = true;
 		}
 		return line;
 	});
+	if ( !haveSubcomponents )
+		return content;
+	
 	return `var _vueSubcomponents = {};
 ${lines.join("\n")}
 ;(function() {
@@ -23,6 +28,12 @@ for ( var name in _vueSubcomponents ) {
     else
         module.exports[ name ] = c;
 }
+var oldCreate = Component.exports.beforeCreate;
+Component.exports.beforeCreate = function() {
+    this.$subcomponents = _vueSubcomponents;
+    if ( oldCreate )
+        oldCreate.apply( this );
+};  
 }());
 `;
 };
