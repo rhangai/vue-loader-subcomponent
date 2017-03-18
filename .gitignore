@@ -1,2 +1,4 @@
 # Yarn
 yarn.lock
+/index.js
+/subcomponent.js
