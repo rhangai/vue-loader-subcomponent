@@ -8,6 +8,7 @@
     "build-subcomponent": "rollup src/subcomponent.js -c --format umd --output subcomponent.js",
     "build": "npm run build-main && npm run build-subcomponent",
     "preversion": "npm run build && git add -f index.js subcomponent.js",
+    "clean": "git clean -fxd --exclude node_modules",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "renanhangai",
