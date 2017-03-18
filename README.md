@@ -69,7 +69,7 @@ module: {
         loader: 'vue-loader',
         options: {
           loaders: {
-            subcomponents: 'vue-loader-subcomponent/subcomponent'
+            subcomponent: 'vue-loader-subcomponent/subcomponent'
           }
         }
       }]
