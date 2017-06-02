@@ -31,8 +31,16 @@ for ( var name in _vueSubcomponents ) {
 var oldCreate = Component.exports.beforeCreate;
 Component.exports.beforeCreate = function() {
     this.$subcomponents = _vueSubcomponents;
-    if ( oldCreate )
-        oldCreate.apply( this );
+    if ( oldCreate ) {
+        if ( typeof oldCreate === 'function' )
+            oldCreate.apply( this );
+        else if ( oldCreate.length ) {
+            for ( var i = 0, len = oldCreate.length; i<len; ++i )
+                oldCreate[i].apply( this );
+        } else {
+            throw new Error( "Invalid beforeCreate function on component" );
+        }
+    }
 };  
 }());
 `;
