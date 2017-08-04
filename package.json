@@ -1,6 +1,6 @@
 {
   "name": "vue-loader-subcomponent",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Load subcomponents inside vue files",
   "main": "index.js",
   "scripts": {
