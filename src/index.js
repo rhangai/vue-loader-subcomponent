@@ -14,20 +14,16 @@ export default function VueLoaderSubcomponent( content ) {
 ${lines.join("\n")}
 ;(function() {
 var components = Component.exports.components = Component.exports.components || {};
-for ( var name in _vueSubcomponents ) {
-    var c = _vueSubcomponents[ name ];
-
+eachSubComponent(function( c, name ) {
     // Recurse subcomponents
     c.components = c.components || {};
-    for ( var subcomp in _vueSubcomponents )
-        c.components[ subcomp ] = _vueSubcomponents[ subcomp ];
+    eachSubComponent(function( subc, subname ) {
+        c.components[ subname ] = subc;
+    });
 
+    // Save the component
     components[ name ] = c;
-    if ( typeof(exports) !== 'undefined' && exports.__esModule )
-        exports[ name ] = c;
-    else
-        module.exports[ name ] = c;
-}
+});
 var oldCreate = Component.exports.beforeCreate;
 Component.exports.beforeCreate = function() {
     this.$subcomponents = _vueSubcomponents;
@@ -42,6 +38,16 @@ Component.exports.beforeCreate = function() {
         }
     }
 };  
+
+
+function eachSubComponent( cb ) {
+    for ( var name in _vueSubcomponents ) {
+        var c = _vueSubcomponents[ name ];
+        if ( 'default' in c )
+            c = c['default'];
+        cb( c, name );
+    }
+}
 }());
 `;
 };
